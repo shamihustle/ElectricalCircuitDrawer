@@ -7,11 +7,26 @@ using System.Threading.Tasks;
 
 namespace Elemnts
 {
-    class Resistor : IElement
+    public class Capacitor : IElement
     {
+        public Capacitor(double value)
+        {
+            _value = value;
+        }
+        private List<IComponent> _components = new List<IComponent>();
 
-        private string _name;
+        public void AddComponent(IComponent component)
+        {
+            _components.Add(component);
+        }
 
+        public void RemoveComponent(IComponent component)
+        {
+            _components.Remove(component);
+        }
+
+        private string _name; 
+        
         private double _value;
 
         /// <summary>
@@ -25,7 +40,7 @@ namespace Elemnts
         }
 
         /// <summary>
-        /// Сопротивление резистора
+        /// Электроёмкость конденсатора
         /// </summary>
         public double Value
         {
@@ -35,19 +50,20 @@ namespace Elemnts
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(@"The resistance must be greater than zero");
+                    throw new ArgumentException(@"The electrical capacity must be greater than zero");
                 }
+                _value = value;
             }
         }
 
         /// <summary>
-        /// Рассчет комплексного сопротивления резистора
+        /// Рассчет комплексного сопротивления конденстора
         /// </summary>
         /// <param name="angularFrequency">Угловая частота</param>
         /// <returns></returns>
         public Complex CalculateZ(double angularFrequency)
         {
-            return new Complex(_value ,0);
+            return new Complex(0, -1/(2*Math.PI*angularFrequency*_value));
         }
     }
 }

@@ -7,10 +7,27 @@ using System.Threading.Tasks;
 
 namespace Elemnts
 {
-    class Capacitor : IElement
+    public class Inductor : IElement
     {
+        public Inductor(double value)
+        {
+            _value = value;
+        }
+
+        private List<IComponent> _components = new List<IComponent>();
+
+        public void AddComponent(IComponent component)
+        {
+            _components.Add(component);
+        }
+
+        public void RemoveComponent(IComponent component)
+        {
+            _components.Remove(component);
+        }
+
         private string _name;
-        
+
         private double _value;
 
         /// <summary>
@@ -24,7 +41,7 @@ namespace Elemnts
         }
 
         /// <summary>
-        /// Электроёмкость конденсатора
+        /// Индуктивность
         /// </summary>
         public double Value
         {
@@ -34,19 +51,20 @@ namespace Elemnts
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(@"The electrical capacity must be greater than zero");
+                    throw new ArgumentException(@"The inductance must be greater than zero");
                 }
+                _value = value;
             }
         }
 
         /// <summary>
-        /// Рассчет комплексного сопротивления конденстора
+        /// Рассчет комплексного индуктивного элемента
         /// </summary>
         /// <param name="angularFrequency">Угловая частота</param>
         /// <returns></returns>
         public Complex CalculateZ(double angularFrequency)
         {
-            return new Complex(0, -1/(2*Math.PI*angularFrequency*_value));
+            return new Complex(0, 2*Math.PI*angularFrequency*_value);
         }
     }
 }

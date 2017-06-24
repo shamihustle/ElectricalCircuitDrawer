@@ -7,8 +7,25 @@ using System.Threading.Tasks;
 
 namespace Elemnts
 {
-    class Inductor : IElement
+    public class Resistor : IElement
     {
+        public Resistor(double value)
+        {
+            _value = value;
+        }
+
+        private List<IComponent> _components = new List<IComponent>();
+
+        public void AddComponent(IComponent component)
+        {
+            _components.Add(component);
+        }
+
+        public void RemoveComponent(IComponent component)
+        {
+            _components.Remove(component);
+        }
+
         private string _name;
 
         private double _value;
@@ -24,7 +41,7 @@ namespace Elemnts
         }
 
         /// <summary>
-        /// Индуктивность
+        /// Сопротивление резистора
         /// </summary>
         public double Value
         {
@@ -34,19 +51,20 @@ namespace Elemnts
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException(@"The inductance must be greater than zero");
+                    throw new ArgumentException(@"The resistance must be greater than zero");
                 }
+                _value = value;
             }
         }
 
         /// <summary>
-        /// Рассчет комплексного индуктивного элемента
+        /// Рассчет комплексного сопротивления резистора
         /// </summary>
         /// <param name="angularFrequency">Угловая частота</param>
         /// <returns></returns>
         public Complex CalculateZ(double angularFrequency)
         {
-            return new Complex(0, 2*Math.PI*angularFrequency*_value);
+            return new Complex(_value ,0);
         }
     }
 }
