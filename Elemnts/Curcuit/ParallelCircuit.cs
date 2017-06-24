@@ -33,6 +33,7 @@ namespace Elemnts.Curcuit
             {
                 result += 1 / _components[i].CalculateZ(angularFrequency);
             }
+            
             return 1 / result;
         }
 
