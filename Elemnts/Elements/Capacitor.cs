@@ -7,24 +7,20 @@ using System.Threading.Tasks;
 
 namespace Elemnts
 {
+    /// <summary>
+    /// Конденсатор
+    /// </summary>
     public class Capacitor : IElement
     {
+        /// <summary>
+        /// Конструктор конденсатора
+        /// </summary>
+        /// <param name="value"></param>
         public Capacitor(double value)
         {
             _value = value;
         }
-        private List<IComponent> _components = new List<IComponent>();
-
-        public void AddComponent(IComponent component)
-        {
-            _components.Add(component);
-        }
-
-        public void RemoveComponent(IComponent component)
-        {
-            _components.Remove(component);
-        }
-
+        
         private string _name; 
         
         private double _value;
@@ -60,7 +56,7 @@ namespace Elemnts
         /// Рассчет комплексного сопротивления конденстора
         /// </summary>
         /// <param name="angularFrequency">Угловая частота</param>
-        /// <returns></returns>
+        /// <returns>Комплексное сопротивление конденсатора</returns>
         public Complex CalculateZ(double angularFrequency)
         {
             return new Complex(0, -1/(2*Math.PI*angularFrequency*_value));

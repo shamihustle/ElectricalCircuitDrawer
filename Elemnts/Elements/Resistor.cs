@@ -7,25 +7,20 @@ using System.Threading.Tasks;
 
 namespace Elemnts
 {
+    /// <summary>
+    /// Резистор
+    /// </summary>
     public class Resistor : IElement
     {
+        /// <summary>
+        /// Конструктор резистора
+        /// </summary>
+        /// <param name="value">Сопротивление</param>
         public Resistor(double value)
         {
             _value = value;
         }
-
-        private List<IComponent> _components = new List<IComponent>();
-
-        public void AddComponent(IComponent component)
-        {
-            _components.Add(component);
-        }
-
-        public void RemoveComponent(IComponent component)
-        {
-            _components.Remove(component);
-        }
-
+        
         private string _name;
 
         private double _value;
@@ -61,7 +56,7 @@ namespace Elemnts
         /// Рассчет комплексного сопротивления резистора
         /// </summary>
         /// <param name="angularFrequency">Угловая частота</param>
-        /// <returns></returns>
+        /// <returns>Комплексное сопротивление резистора</returns>
         public Complex CalculateZ(double angularFrequency)
         {
             return new Complex(_value ,0);

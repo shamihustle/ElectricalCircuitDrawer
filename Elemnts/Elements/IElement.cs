@@ -10,8 +10,6 @@ namespace Elemnts
 {
     public interface IElement : IComponent
     {
-        string Name { get; set; }
-
         /// <summary>
         /// Значение номинала
         /// </summary>

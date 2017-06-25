@@ -8,12 +8,21 @@ using System.Threading.Tasks;
 
 namespace Elemnts
 {
+    /// <summary>
+    /// Общий интерфейс
+    /// </summary>
     public interface IComponent
     {
-        void AddComponent(IComponent component);
+        /// <summary>
+        /// Имя компонента
+        /// </summary>
+        string Name { get; set; }
 
-        void RemoveComponent(IComponent component);
-
+        /// <summary>
+        /// Рассчет комплексного сопротивления
+        /// </summary>
+        /// <param name="angularFrequency">Частота сигнала</param>
+        /// <returns>Комплексное сопротивление</returns>
         Complex CalculateZ(double angularFrequency);
 
     }

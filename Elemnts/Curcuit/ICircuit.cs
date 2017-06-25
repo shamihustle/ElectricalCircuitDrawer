@@ -9,6 +9,16 @@ namespace Elemnts.Curcuit
 {
     public interface ICircuit : IComponent
     {
-        string Name { get; set; }
+        /// <summary>
+        /// Добавить компонент
+        /// </summary>
+        /// <param name="component">Элемент или соединение</param>
+        void AddComponent(IComponent component);
+
+        /// <summary>
+        /// Удалить компонент
+        /// </summary>
+        /// <param name="component">Элемент или соединение</param>
+        void RemoveComponent(IComponent component);
     }
 }
