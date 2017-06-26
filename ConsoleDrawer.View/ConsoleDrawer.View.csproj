@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormAddCircuit.cs">
+    <Compile Include="FormCircuit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAddCircuit.Designer.cs">
-      <DependentUpon>FormAddCircuit.cs</DependentUpon>
+    <Compile Include="FormCircuit.Designer.cs">
+      <DependentUpon>FormCircuit.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAddElement.cs">
       <SubType>Form</SubType>
@@ -61,8 +61,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormAddCircuit.resx">
-      <DependentUpon>FormAddCircuit.cs</DependentUpon>
+    <EmbeddedResource Include="FormCircuit.resx">
+      <DependentUpon>FormCircuit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddElement.resx">
       <DependentUpon>FormAddElement.cs</DependentUpon>

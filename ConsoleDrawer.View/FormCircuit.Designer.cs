@@ -1,6 +1,6 @@
 ﻿namespace ConsoleDrawer.View
 {
-    partial class FormAddCircuit
+    partial class FormCircuit
     {
         /// <summary>
         /// Required designer variable.
@@ -33,11 +33,15 @@
             this.buttonAddElement = new System.Windows.Forms.Button();
             this.buttonCreateSubcircuit = new System.Windows.Forms.Button();
             this.treeViewSubcircuit = new System.Windows.Forms.TreeView();
-            this.textBoxImpedance = new System.Windows.Forms.TextBox();
+            this.textBoxImpedanceReal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxFrequency = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.buttonCalculateZ = new System.Windows.Forms.Button();
+            this.groupBoxImpedance = new System.Windows.Forms.GroupBox();
+            this.textBoxImpedanceImaginary = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBoxImpedance.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxCircuit
@@ -88,18 +92,18 @@
             this.treeViewSubcircuit.Size = new System.Drawing.Size(383, 316);
             this.treeViewSubcircuit.TabIndex = 6;
             // 
-            // textBoxImpedance
+            // textBoxImpedanceReal
             // 
-            this.textBoxImpedance.Location = new System.Drawing.Point(401, 322);
-            this.textBoxImpedance.Name = "textBoxImpedance";
-            this.textBoxImpedance.ReadOnly = true;
-            this.textBoxImpedance.Size = new System.Drawing.Size(100, 22);
-            this.textBoxImpedance.TabIndex = 7;
+            this.textBoxImpedanceReal.Location = new System.Drawing.Point(6, 38);
+            this.textBoxImpedanceReal.Name = "textBoxImpedanceReal";
+            this.textBoxImpedanceReal.ReadOnly = true;
+            this.textBoxImpedanceReal.Size = new System.Drawing.Size(81, 22);
+            this.textBoxImpedanceReal.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(401, 59);
+            this.label2.Location = new System.Drawing.Point(398, 185);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(119, 17);
             this.label2.TabIndex = 8;
@@ -107,23 +111,14 @@
             // 
             // textBoxFrequency
             // 
-            this.textBoxFrequency.Location = new System.Drawing.Point(401, 79);
+            this.textBoxFrequency.Location = new System.Drawing.Point(398, 205);
             this.textBoxFrequency.Name = "textBoxFrequency";
             this.textBoxFrequency.Size = new System.Drawing.Size(34, 22);
             this.textBoxFrequency.TabIndex = 9;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(401, 302);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 17);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Impedance";
-            // 
             // buttonCalculateZ
             // 
-            this.buttonCalculateZ.Location = new System.Drawing.Point(401, 350);
+            this.buttonCalculateZ.Location = new System.Drawing.Point(401, 352);
             this.buttonCalculateZ.Name = "buttonCalculateZ";
             this.buttonCalculateZ.Size = new System.Drawing.Size(100, 23);
             this.buttonCalculateZ.TabIndex = 12;
@@ -131,23 +126,63 @@
             this.buttonCalculateZ.UseVisualStyleBackColor = true;
             this.buttonCalculateZ.Click += new System.EventHandler(this.buttonCalculateZ_Click);
             // 
-            // FormAddCircuit
+            // groupBoxImpedance
+            // 
+            this.groupBoxImpedance.Controls.Add(this.textBoxImpedanceImaginary);
+            this.groupBoxImpedance.Controls.Add(this.label4);
+            this.groupBoxImpedance.Controls.Add(this.label3);
+            this.groupBoxImpedance.Controls.Add(this.textBoxImpedanceReal);
+            this.groupBoxImpedance.Location = new System.Drawing.Point(401, 232);
+            this.groupBoxImpedance.Name = "groupBoxImpedance";
+            this.groupBoxImpedance.Size = new System.Drawing.Size(155, 114);
+            this.groupBoxImpedance.TabIndex = 13;
+            this.groupBoxImpedance.TabStop = false;
+            this.groupBoxImpedance.Text = "Impedance";
+            // 
+            // textBoxImpedanceImaginary
+            // 
+            this.textBoxImpedanceImaginary.Location = new System.Drawing.Point(6, 83);
+            this.textBoxImpedanceImaginary.Name = "textBoxImpedanceImaginary";
+            this.textBoxImpedanceImaginary.ReadOnly = true;
+            this.textBoxImpedanceImaginary.Size = new System.Drawing.Size(81, 22);
+            this.textBoxImpedanceImaginary.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 63);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 17);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Imaginary";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 17);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Real";
+            // 
+            // FormCircuit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(575, 385);
+            this.ClientSize = new System.Drawing.Size(583, 391);
+            this.Controls.Add(this.groupBoxImpedance);
             this.Controls.Add(this.buttonCalculateZ);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxFrequency);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxImpedance);
             this.Controls.Add(this.treeViewSubcircuit);
             this.Controls.Add(this.buttonCreateSubcircuit);
             this.Controls.Add(this.buttonAddElement);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxCircuit);
-            this.Name = "FormAddCircuit";
+            this.Name = "FormCircuit";
             this.Text = "FormAddCircuit";
+            this.groupBoxImpedance.ResumeLayout(false);
+            this.groupBoxImpedance.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,10 +195,13 @@
         private System.Windows.Forms.Button buttonAddElement;
         private System.Windows.Forms.Button buttonCreateSubcircuit;
         private System.Windows.Forms.TreeView treeViewSubcircuit;
-        private System.Windows.Forms.TextBox textBoxImpedance;
+        private System.Windows.Forms.TextBox textBoxImpedanceReal;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxFrequency;
         private System.Windows.Forms.Button buttonCalculateZ;
+        private System.Windows.Forms.GroupBox groupBoxImpedance;
+        private System.Windows.Forms.TextBox textBoxImpedanceImaginary;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
     }
 }

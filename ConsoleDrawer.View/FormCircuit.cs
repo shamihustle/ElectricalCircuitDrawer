@@ -15,11 +15,13 @@ using Elemnts.Elements;
 
 namespace ConsoleDrawer.View
 {
-    public partial class FormAddCircuit : Form
+    public partial class FormCircuit : Form
     {
-        public FormAddCircuit()
+        public FormCircuit()
         {
             InitializeComponent();
+
+            groupBoxImpedance.Visible = false;
         }
 
         private List<ICircuit> _components = new List<ICircuit>();
@@ -122,7 +124,11 @@ namespace ConsoleDrawer.View
                 return;
             }
 
-            textBoxImpedance.Text = _components[0].CalculateZ(Convert.ToDouble(textBoxFrequency.Text)).ToString();
+            groupBoxImpedance.Visible = true;
+            textBoxImpedanceReal.Text = 
+                Math.Round(_components[0].CalculateZ(Convert.ToDouble(textBoxFrequency.Text)).Real, 4).ToString();
+            textBoxImpedanceImaginary.Text = 
+                Math.Round(_components[0].CalculateZ(Convert.ToDouble(textBoxFrequency.Text)).Imaginary, 4).ToString();
         }
     }
 }
