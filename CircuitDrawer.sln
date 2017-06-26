@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elements", "Elemnts\Element
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCircuit", "ConsoleCircuit\ConsoleCircuit.csproj", "{84F41624-BE92-4B0D-8868-1B9C365FDEFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDrawer.View", "ConsoleDrawer.View\ConsoleDrawer.View.csproj", "{48405AF7-D257-49A6-975B-F9B207C7C068}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CircuitDrawer.View", "ConsoleDrawer.View\CircuitDrawer.View.csproj", "{48405AF7-D257-49A6-975B-F9B207C7C068}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

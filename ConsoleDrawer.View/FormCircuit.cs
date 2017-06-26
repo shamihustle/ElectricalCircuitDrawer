@@ -130,5 +130,11 @@ namespace ConsoleDrawer.View
             textBoxImpedanceImaginary.Text = 
                 Math.Round(_components[0].CalculateZ(Convert.ToDouble(textBoxFrequency.Text)).Imaginary, 4).ToString();
         }
+
+        private void buttonDraw_Click(object sender, EventArgs e)
+        {
+            var form = new FormDraw(_components);
+            form.ShowDialog();
+        }
     }
 }

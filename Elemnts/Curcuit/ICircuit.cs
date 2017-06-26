@@ -9,6 +9,8 @@ namespace Elemnts.Curcuit
 {
     public interface ICircuit : IComponent
     {
+        List<IComponent> Components { get; set; }
+
         /// <summary>
         /// Добавить компонент
         /// </summary>
