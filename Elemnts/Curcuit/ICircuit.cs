@@ -13,12 +13,12 @@ namespace Elemnts.Curcuit
         /// Добавить компонент
         /// </summary>
         /// <param name="component">Элемент или соединение</param>
-        void AddComponent(IComponent component);
+        void Add(IComponent component);
 
         /// <summary>
         /// Удалить компонент
         /// </summary>
         /// <param name="component">Элемент или соединение</param>
-        void RemoveComponent(IComponent component);
+        void Remove(IComponent component);
     }
 }

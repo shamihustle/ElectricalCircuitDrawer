@@ -26,7 +26,7 @@ namespace Elemnts.Curcuit
         /// Добавить в список
         /// </summary>
         /// <param name="component">Компонент</param>
-        public void AddComponent(IComponent component)
+        public void Add(IComponent component)
         {
             _components.Add(component);
         }
@@ -35,7 +35,7 @@ namespace Elemnts.Curcuit
         /// Удалить из списка
         /// </summary>
         /// <param name="component">Компонент</param>
-        public void RemoveComponent(IComponent component)
+        public void Remove(IComponent component)
         {
             _components.Remove(component);
         }
@@ -47,14 +47,14 @@ namespace Elemnts.Curcuit
         /// <returns>Уомплексное сопротивление цепи последоватенльно соединения</returns>
         public Complex CalculateZ(double angularFrequency)
         {
-            Complex result = new Complex();
+            Complex сonduction = new Complex();
 
             for (int i = 0; i < _components.Count; i++)
             {
-                result += _components[i].CalculateZ(angularFrequency);
+                сonduction += _components[i].CalculateZ(angularFrequency);
             }
 
-            return result;
+            return сonduction;
         } 
     }
 }

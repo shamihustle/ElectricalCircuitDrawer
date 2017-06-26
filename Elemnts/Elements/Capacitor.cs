@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Elemnts
+namespace Elemnts.Elements
 {
     /// <summary>
     /// Конденсатор
@@ -53,7 +49,7 @@ namespace Elemnts
         }
 
         /// <summary>
-        /// Рассчет комплексного сопротивления конденстора
+        /// Расчет комплексного сопротивления конденстора
         /// </summary>
         /// <param name="angularFrequency">Угловая частота</param>
         /// <returns>Комплексное сопротивление конденсатора</returns>

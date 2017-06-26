@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elements", "Elemnts\Element
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCircuit", "ConsoleCircuit\ConsoleCircuit.csproj", "{84F41624-BE92-4B0D-8868-1B9C365FDEFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDrawer.View", "ConsoleDrawer.View\ConsoleDrawer.View.csproj", "{48405AF7-D257-49A6-975B-F9B207C7C068}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{84F41624-BE92-4B0D-8868-1B9C365FDEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84F41624-BE92-4B0D-8868-1B9C365FDEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84F41624-BE92-4B0D-8868-1B9C365FDEFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48405AF7-D257-49A6-975B-F9B207C7C068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48405AF7-D257-49A6-975B-F9B207C7C068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48405AF7-D257-49A6-975B-F9B207C7C068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48405AF7-D257-49A6-975B-F9B207C7C068}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

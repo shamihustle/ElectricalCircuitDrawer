@@ -7,8 +7,8 @@
     <ProjectGuid>{71557639-665E-4D5C-8BFA-0F4FFC5F3BBF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Elemnts</RootNamespace>
-    <AssemblyName>Elemnts</AssemblyName>
+    <RootNamespace>Elements</RootNamespace>
+    <AssemblyName>Elements</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -28,6 +28,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
