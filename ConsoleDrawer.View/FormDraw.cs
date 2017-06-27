@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,38 +42,49 @@ namespace ConsoleDrawer.View
                 var height = 80 - i*20;
                 if (component[i] is SerialCircuit)
                 {
-                    tupleList.Add(DrawSerial(e, blackPen, tupleList[i].Item1, tupleList[i].Item2));
+                    tupleList.Add(DrawSerial(e, blackPen, tupleList[tupleList.Count - 1].Item1, tupleList[tupleList.Count - 1].Item2));
+                    foreach (var element in component[i].Components)
+                    {
+                        if (element is Resistor)
+                        {
+                            tupleList.Add(DrawResistor(tupleList[tupleList.Count - 1].Item1, tupleList[tupleList.Count - 1].Item2, e, blackPen));
+                        }
+                        if (element is Capacitor)
+                        {
+                            tupleList.Add(DrawCapacitor(tupleList[tupleList.Count - 1].Item1, tupleList[tupleList.Count - 1].Item2, e, blackPen));
+                        }
+                        if (element is Inductor)
+                        {
+                            tupleList.Add(DrawInductor(tupleList[tupleList.Count - 1].Item1, tupleList[tupleList.Count - 1].Item2, e, blackPen));
+                        }
+                    }
                 }
                 if (component[i] is ParallelCircuit)
                 {
-                    tupleList.Add(DrawParallel(e, blackPen, tupleList[i].Item1, tupleList[i].Item2, height, component[i].Components.Count)[i]);
-                    tupleList = DrawParallel(e, blackPen, tupleList[i].Item1, tupleList[i].Item2, height, component[i].Components.Count);
-                }
-                foreach (var element in component[i].Components)
-                {
-                    if (element is Resistor)
+                    var tupleListParallel = DrawParallel(e, blackPen, tupleList[tupleList.Count - 1].Item1, tupleList[tupleList.Count - 1].Item2, height, component[i].Components.Count);
+                    for (int j = 0; j < tupleListParallel.Count; j++)
                     {
-                        for (int j = 0; j < tupleList.Count; j++)
+                        for (int k = j; k < component[i].Components.Count; k++)
                         {
-                            tupleList.Add(DrawResistor(tupleList[j].Item1, tupleList[j].Item2, e, blackPen));
+                            if (component[i].Components[k] is Resistor)
+                            {
+                                tupleList.Add(DrawResistor(tupleListParallel[j].Item1, tupleListParallel[j].Item2, e, blackPen));
+                                break;
+                            }
+                            if (component[i].Components[k] is Capacitor)
+                            {
+                                tupleList.Add(DrawCapacitor(tupleListParallel[j].Item1, tupleListParallel[j].Item2, e, blackPen));
+                                break;
+                            }
+                            if (component[i].Components[k] is Inductor)
+                            {
+                                tupleList.Add(DrawInductor(tupleListParallel[j].Item1, tupleListParallel[j].Item2, e, blackPen));
+                                break;
+                            }
                         }
-                    }
-                    if (element is Capacitor)
-                    {
-                        for (int j = 0; j < tupleList.Count; j++)
-                        {
-                            tupleList.Add(DrawCapacitor(tupleList[j].Item1, tupleList[j].Item2, e, blackPen));
-                        }
-                    }
-                    if (element is Inductor)
-                    {
-                        for (int j = 0; j < tupleList.Count; j++)
-                        {
-                            tupleList.Add(DrawInductor(tupleList[j].Item1, tupleList[j].Item2, e, blackPen));
-                        }
-
                     }
                 }
+                
             }
         }
 
@@ -105,9 +117,8 @@ namespace ConsoleDrawer.View
 
         private Tuple<int, int> DrawSerial(PaintEventArgs e, Pen pen, int x, int y)
         {
-            e.Graphics.DrawEllipse(pen, x, y, 5, 5);
-            e.Graphics.DrawLine(pen, x + 5, y + 3, x + 25, y + 3);
-            return new Tuple<int, int>(x + 25, y + 3);
+            e.Graphics.DrawLine(pen, x, y, x + 25, y);
+            return new Tuple<int, int>(x + 25, y);
         }
 
         private List<Tuple<int, int>> DrawParallel(PaintEventArgs e, Pen pen, int x, int y, int height, int countConnection)
@@ -142,7 +153,7 @@ namespace ConsoleDrawer.View
                 e.Graphics.DrawLine(pen, x + 25, y + 3 - height, x + 65, y + 3 - height);
                 tupleList.Add(new Tuple<int, int>(x + 65, y + 3 + height));
                 tupleList.Add(new Tuple<int, int>(x + 65, y + 3 - height));
-                var count = 0;
+                var count = height * 2 / (countConnection - 1);
                 int i = 2;
                 do
                 {

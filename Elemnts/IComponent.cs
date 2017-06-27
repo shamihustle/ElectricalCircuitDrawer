@@ -13,6 +13,7 @@ namespace Elemnts
     /// </summary>
     public interface IComponent
     {
+
         /// <summary>
         /// Имя компонента
         /// </summary>
