@@ -61,7 +61,7 @@ namespace ConsoleDrawer.View
                 }
                 if (component[i] is ParallelCircuit)
                 {
-                    var tupleListParallel = DrawParallel(e, blackPen, tupleList[tupleList.Count - 1].Item1, tupleList[tupleList.Count - 1].Item2, height, component[i].Components.Count);
+                    var tupleListParallel = DrawParallel(e, blackPen, tupleList[tupleList.Count - 1].Item1, tupleList[tupleList.Count - 1 ].Item2, height, component[i].Components.Count);
                     for (int j = 0; j < tupleListParallel.Count; j++)
                     {
                         for (int k = j; k < component[i].Components.Count; k++)
@@ -83,6 +83,7 @@ namespace ConsoleDrawer.View
                             }
                         }
                     }
+                    tupleList.Add(tupleListParallel[tupleListParallel.Count-1]);
                 }
                 
             }

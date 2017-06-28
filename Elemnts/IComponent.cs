@@ -5,6 +5,8 @@ using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+
 
 namespace Elemnts
 {
@@ -25,6 +27,6 @@ namespace Elemnts
         /// <param name="angularFrequency">Частота сигнала</param>
         /// <returns>Комплексное сопротивление</returns>
         Complex CalculateZ(double angularFrequency);
-
+        
     }
 }
