@@ -53,6 +53,20 @@ namespace ConsoleDrawer.View
             }
             set
             {
+                textBoxValue.Text = value.ToString();
+                if (value is Resistor)
+                {
+                    comboBoxElements.SelectedIndex = 1;
+                }
+                if (value is Capacitor)
+                {
+                    comboBoxElements.SelectedIndex = 2;
+                }
+                if (value is Inductor)
+                {
+                    comboBoxElements.SelectedIndex = 3;
+                }
+
                 _element = value;
                 
             }

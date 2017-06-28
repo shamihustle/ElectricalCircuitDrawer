@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Elemnts.Elements;
 
 namespace Elemnts.Curcuit
 {
@@ -61,6 +62,27 @@ namespace Elemnts.Curcuit
             }
 
             return сonduction;
-        } 
+        }
+
+        public void ModifyComponent(IComponent componentOld, IComponent componentNew)
+        {
+            if (componentOld is IElement)
+            {
+                componentNew = componentOld;
+            }
+            if (componentOld is ICircuit)
+            {
+                if (componentOld is SerialCircuit)
+                {
+                    var subcircuitSerial = (SerialCircuit)componentOld;
+                    ModifyComponent(subcircuitSerial, componentNew);
+                }
+                if (componentOld is ParallelCircuit)
+                {
+                    var subcircuitParallel = (ParallelCircuit)componentOld;
+                    ModifyComponent(subcircuitParallel, componentNew);
+                }
+            }
+        }
     }
 }

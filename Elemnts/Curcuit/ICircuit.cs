@@ -22,5 +22,8 @@ namespace Elemnts.Curcuit
         /// </summary>
         /// <param name="component">Элемент или соединение</param>
         void Remove(IComponent component);
+
+        void ModifyComponent(IComponent componentOld, IComponent componentNew);
+
     }
 }

@@ -133,8 +133,7 @@ namespace ConsoleDrawer.View
 
         private void buttonDraw_Click(object sender, EventArgs e)
         {
-            var form = new FormDraw(_components);
-            form.ShowDialog();
         }
+        
     }
 }

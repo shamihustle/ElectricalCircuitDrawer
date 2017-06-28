@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Draw\CircuitDraw.cs" />
+    <Compile Include="Draw\SubcircuitDraw.cs" />
+    <Compile Include="Draw\ElementDraw.cs" />
     <Compile Include="FormCircuit.cs">
       <SubType>Form</SubType>
     </Compile>
