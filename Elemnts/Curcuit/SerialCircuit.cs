@@ -13,6 +13,7 @@ namespace Elemnts.Curcuit
     /// </summary>
     public class SerialCircuit : ICircuit
     {
+        //TODO xml комментарий
         public List<IComponent> Components
         {
             get { return _components; }
@@ -22,6 +23,7 @@ namespace Elemnts.Curcuit
         /// <summary>
         /// Уникальное имя соединения
         /// </summary>
+        //TODO проверка на string.Empty
         public string Name { get; set; }
         
         /// <summary>
@@ -35,6 +37,7 @@ namespace Elemnts.Curcuit
         /// <param name="component">Компонент</param>
         public void Add(IComponent component)
         {
+        //TODO Проверка _component на == null
             _components.Add(component);
         }
         
@@ -44,6 +47,7 @@ namespace Elemnts.Curcuit
         /// <param name="component">Компонент</param>
         public void Remove(IComponent component)
         {
+        //TODO Проверка _component на == null
             _components.Remove(component);
         }
 
@@ -54,6 +58,7 @@ namespace Elemnts.Curcuit
         /// <returns>Уомплексное сопротивление цепи последоватенльно соединения</returns>
         public Complex CalculateZ(double angularFrequency)
         {
+        //TODO Проверка double переменной на == double.NaN, double.Infinity и <= 0
             Complex сonduction = new Complex();
 
             for (int i = 0; i < _components.Count; i++)
@@ -63,7 +68,8 @@ namespace Elemnts.Curcuit
 
             return сonduction;
         }
-
+        
+        //TODO xml комментарий
         public void ModifyComponent(IComponent componentOld, IComponent componentNew)
         {
             if (componentOld is IElement)
