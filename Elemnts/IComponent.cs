@@ -28,6 +28,6 @@ namespace Elemnts
         /// <returns>Комплексное сопротивление</returns>
         Complex CalculateZ(double angularFrequency);
         
-
+        
     }
 }

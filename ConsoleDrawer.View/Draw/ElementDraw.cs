@@ -13,7 +13,7 @@ namespace ConsoleDrawer.View.Draw
 {
     static public class ElementDraw
     {
-        public static Bitmap DrawElement(IComponent element)
+        public static Bitmap DrawElement(IElement element)
         {
             if (element is Resistor)
             {
@@ -65,11 +65,6 @@ namespace ConsoleDrawer.View.Draw
             graphics.DrawLine(Pens.Black, 10, 0, 10, 20);
             graphics.DrawLine(Pens.Black, 30, 0, 30, 20);
             graphics.DrawLine(Pens.Black, 30, 10, 40, 10);
-        }
-
-        static Tuple<int, int> getSizeElement(Bitmap bitMapElement)
-        {
-            return new Tuple<int, int>(bitMapElement.Height, bitMapElement.Width);
         }
     }
 }
