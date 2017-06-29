@@ -99,7 +99,8 @@ namespace ConsoleDrawer.View
                 serial3.Add(new Inductor(70));
                 parallel1.Add(serial3);
                 serial1.Add(parallel1);
-                e.Graphics.DrawImage(СircuitDraw.CiruitDraw(serial1), new Point(0, 0));
+                e.Graphics.DrawImage(СircuitDraw.DrawComponent(serial1), new Point(0, 0));
+
             }
         }
     }

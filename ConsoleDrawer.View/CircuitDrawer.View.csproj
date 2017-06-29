@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="Draw\SizeDeterminator.cs" />
     <Compile Include="Draw\СircuitDraw.cs" />
-    <Compile Include="Draw\ElementDraw.cs" />
     <Compile Include="FormCircuit.cs">
       <SubType>Form</SubType>
     </Compile>
