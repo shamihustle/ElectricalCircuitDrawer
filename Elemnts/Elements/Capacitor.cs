@@ -14,6 +14,7 @@ namespace Elemnts.Elements
         /// <param name="value"></param>
         public Capacitor(double value)
         {
+        //TODO Проверка double значения на == double.NaN, double.Infinity и <= 0
             _value = value;
         }
         
@@ -24,6 +25,7 @@ namespace Elemnts.Elements
         /// <summary>
         /// Уникальное имя элемента
         /// </summary>
+        //TODO проверка на string.Empty
         public string Name
         {
             get { return _name; }
@@ -34,6 +36,7 @@ namespace Elemnts.Elements
         /// <summary>
         /// Электроёмкость конденсатора
         /// </summary>
+        //TODO Проверка double значения на == double.NaN, double.Infinity и <= 0
         public double Value
         {
             get { return _value; }
