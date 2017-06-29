@@ -13,7 +13,11 @@ namespace Elemnts.Curcuit
     /// </summary>
     public class SerialCircuit : ICircuit
     {
-        //TODO xml комментарий
+        public event EventHandler CircuitChanged;
+        
+        /// <summary>
+        /// Список компонентов
+        /// </summary>
         public List<IComponent> Components
         {
             get { return _components; }

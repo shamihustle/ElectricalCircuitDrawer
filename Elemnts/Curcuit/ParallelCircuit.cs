@@ -13,6 +13,8 @@ namespace Elemnts.Curcuit
     /// </summary>
     public class ParallelCircuit : ICircuit
     {
+        public event EventHandler CircuitChanged;
+
         public List<IComponent> Components
         {
             get { return _components; }
@@ -68,7 +70,7 @@ namespace Elemnts.Curcuit
         {
             if (componentOld is IElement)
             {
-                componentNew = componentOld;
+                componentOld = componentNew;
             }
             if (componentOld is ICircuit)
             {

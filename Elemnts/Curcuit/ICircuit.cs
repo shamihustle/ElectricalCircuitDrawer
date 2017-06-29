@@ -11,6 +11,9 @@ namespace Elemnts.Curcuit
     {
         List<IComponent> Components { get; set; }
 
+        event EventHandler CircuitChanged;
+
+
         /// <summary>
         /// Добавить компонент
         /// </summary>

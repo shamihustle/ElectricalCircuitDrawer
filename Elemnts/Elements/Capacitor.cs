@@ -8,13 +8,14 @@ namespace Elemnts.Elements
     /// </summary>
     public class Capacitor : IElement
     {
+        public EventHandler ValueChanged;
+
         /// <summary>
         /// Конструктор конденсатора
         /// </summary>
         /// <param name="value"></param>
         public Capacitor(double value)
         {
-        //TODO Проверка double значения на == double.NaN, double.Infinity и <= 0
             _value = value;
         }
         
@@ -48,6 +49,7 @@ namespace Elemnts.Elements
                     throw new ArgumentException(@"The electrical capacity must be greater than zero");
                 }
                 _value = value;
+                ValueChanged?.Invoke(this, new EventArgs());
             }
         }
 

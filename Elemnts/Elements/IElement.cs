@@ -1,4 +1,6 @@
-﻿namespace Elemnts.Elements
+﻿using System;
+
+namespace Elemnts.Elements
 {
     public interface IElement : IComponent
     {

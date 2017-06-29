@@ -8,6 +8,8 @@ namespace Elemnts.Elements
     /// </summary>
     public class Inductor : IElement
     {
+        public event EventHandler ValueChanged;
+
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -45,6 +47,7 @@ namespace Elemnts.Elements
                     throw new ArgumentException(@"The inductance must be greater than zero");
                 }
                 _value = value;
+                ValueChanged?.Invoke(this, new EventArgs());
             }
         }
 
