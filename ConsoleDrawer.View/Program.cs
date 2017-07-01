@@ -16,7 +16,7 @@ namespace ConsoleDrawer.View
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormDraw());
+            Application.Run(new MainForm());
         }
     }
 }

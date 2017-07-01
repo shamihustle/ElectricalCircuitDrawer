@@ -47,36 +47,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Draw\SizeDeterminator.cs" />
-    <Compile Include="Draw\СircuitDraw.cs" />
-    <Compile Include="FormCircuit.cs">
+    <Compile Include="Draw\СircuitDrawer.cs" />
+    <Compile Include="FormAddElements.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCircuit.Designer.cs">
-      <DependentUpon>FormCircuit.cs</DependentUpon>
+    <Compile Include="FormAddElements.Designer.cs">
+      <DependentUpon>FormAddElements.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAddElement.cs">
+    <Compile Include="FormAddSircuit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAddElement.Designer.cs">
-      <DependentUpon>FormAddElement.cs</DependentUpon>
+    <Compile Include="FormAddSircuit.Designer.cs">
+      <DependentUpon>FormAddSircuit.cs</DependentUpon>
     </Compile>
     <Compile Include="FormDraw.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDraw.Designer.cs">
+    <Compile Include="FormDraw.designer.cs">
       <DependentUpon>FormDraw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormCircuit.resx">
-      <DependentUpon>FormCircuit.cs</DependentUpon>
+    <EmbeddedResource Include="FormAddElements.resx">
+      <DependentUpon>FormAddElements.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAddElement.resx">
-      <DependentUpon>FormAddElement.cs</DependentUpon>
+    <EmbeddedResource Include="FormAddSircuit.resx">
+      <DependentUpon>FormAddSircuit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDraw.resx">
-      <DependentUpon>FormDraw.cs</DependentUpon>
+    <EmbeddedResource Include="FormDraw.resx" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -87,6 +93,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\Elemnts.Curcuit.ICircuit.datasource" />
+    <None Include="Properties\DataSources\Elemnts.Curcuit.ParallelCircuit.datasource" />
+    <None Include="Properties\DataSources\Elemnts.Curcuit.SerialCircuit.datasource" />
+    <None Include="Properties\DataSources\Elemnts.Elements.Capacitor.datasource" />
+    <None Include="Properties\DataSources\Elemnts.Elements.IElement.datasource" />
+    <None Include="Properties\DataSources\Elemnts.Elements.Inductor.datasource" />
+    <None Include="Properties\DataSources\Elemnts.Elements.Resistor.datasource" />
+    <None Include="Properties\DataSources\Elemnts.IComponent.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

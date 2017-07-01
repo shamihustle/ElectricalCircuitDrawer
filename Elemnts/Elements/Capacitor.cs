@@ -29,9 +29,7 @@ namespace Elemnts.Elements
         //TODO проверка на string.Empty
         public string Name
         {
-            get { return _name; }
-
-            set { _name = value; }
+            get { return "Capacitor"; }
         }
 
         /// <summary>

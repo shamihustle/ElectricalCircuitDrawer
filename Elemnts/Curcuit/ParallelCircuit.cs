@@ -24,7 +24,7 @@ namespace Elemnts.Curcuit
         /// <summary>
         /// Уникальное имя соединения
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; } = "Parallel circuit";
         
         /// <summary>
         /// Список компонентов в соединении
@@ -66,26 +66,70 @@ namespace Elemnts.Curcuit
             return 1 / сonduction;
         }
 
-        public void ModifyComponent(IComponent componentOld, IComponent componentNew)
+        public void ModifyComponent(IElement componentOld, IElement componentNew)
         {
-            if (componentOld is IElement)
+            foreach (var component in _components)
             {
-                componentOld = componentNew;
-            }
-            if (componentOld is ICircuit)
-            {
-                if (componentOld is SerialCircuit)
+                if (component is IElement)
                 {
-                    var subcircuitSerial = (SerialCircuit)componentOld;
-                    ModifyComponent(subcircuitSerial, componentNew);
+                    var el = (IElement)component;
+                    if (el == componentOld)
+                    {
+                        int index = _components.IndexOf(component);
+                        _components.RemoveAt(index);
+                        _components.Insert(index, componentNew);
+                        break;
+                    }
                 }
-                if (componentOld is ParallelCircuit)
+                if (component is ICircuit)
                 {
-                    var subcircuitParallel = (ParallelCircuit)componentOld;
-                    ModifyComponent(subcircuitParallel, componentNew);
+                    var circuit = (ICircuit)component;
+                    circuit.ModifyComponent(componentOld, componentNew);
                 }
             }
         }
 
+        public void RemoveComponent(IElement element)
+        {
+            foreach (var component in _components)
+            {
+                if (component is IElement)
+                {
+                    var el = (IElement)component;
+                    if (el == element)
+                    {
+                        _components.Remove(el);
+                        break;
+                    }
+                }
+                if (component is ICircuit)
+                {
+                    var circuit = (ICircuit)component;
+                    circuit.RemoveComponent(element);
+                }
+            }
+        }
+
+        public void ModifyCircuit(ICircuit componentOld, ICircuit componentNew)
+        {
+            foreach (var component in _components)
+            {
+                if (component is ICircuit)
+                {
+                    var el = (ICircuit)component;
+                    if (el == componentOld)
+                    {
+                        int index = _components.IndexOf(component);
+                        _components.RemoveAt(index);
+                        _components.Insert(index, componentNew);
+                        break;
+                    }
+                    else
+                    {
+                        el.ModifyCircuit(componentOld, componentNew);
+                    }
+                }
+            }
+        }
     }
 }

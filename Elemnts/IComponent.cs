@@ -19,7 +19,7 @@ namespace Elemnts
         /// <summary>
         /// Имя компонента
         /// </summary>
-        string Name { get; set; }
+        string Name { get; }
 
         /// <summary>
         /// Рассчет комплексного сопротивления

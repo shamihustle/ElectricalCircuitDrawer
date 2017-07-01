@@ -8,6 +8,5 @@ namespace Elemnts.Elements
         /// Значение номинала
         /// </summary>
         double Value { get; set; }
-        
     }
 }

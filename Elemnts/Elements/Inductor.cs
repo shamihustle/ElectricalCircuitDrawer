@@ -28,9 +28,7 @@ namespace Elemnts.Elements
         /// </summary>
         public string Name
         {
-            get { return _name; }
-
-            set { _name = value; }
+            get { return "Inductor"; }
         }
 
         /// <summary>

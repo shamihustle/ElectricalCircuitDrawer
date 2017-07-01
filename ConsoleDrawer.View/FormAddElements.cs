@@ -7,71 +7,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Elemnts;
 using Elemnts.Elements;
 
 namespace ConsoleDrawer.View
 {
-    public partial class FormAddElement : Form
+    public partial class FormAddElements : Form
     {
-        public FormAddElement()
+        public FormAddElements()
         {
             InitializeComponent();
         }
 
-        private IElement _element;
 
         public IElement Element
         {
             get
             {
-                var ss = comboBoxElements.SelectedIndex;
-
+                var ss = comboBoxAddElement.SelectedIndex;
                 switch (ss)
                 {
                     case 0:
                         {
                             var resistor = new Resistor(Convert.ToDouble(textBoxValue.Text));
-                            _element = resistor;
-                            break;
+                            return resistor;
                         }
                     case 1:
                         {
                             var capacitor = new Capacitor(Convert.ToDouble(textBoxValue.Text));
-                            _element = capacitor;
-                            break;
+                            return capacitor;
                         }
                     case 2:
                         {
                             var inductor = new Inductor(Convert.ToDouble(textBoxValue.Text));
-                            _element = inductor;
-                            break;
+                            return inductor;
                         }
                 }
-
-                return _element;
+                throw new ArgumentException(@"Error with combobx element");
             }
             set
             {
-                textBoxValue.Text = value.ToString();
                 if (value is Resistor)
                 {
-                    comboBoxElements.SelectedIndex = 1;
+                    comboBoxAddElement.SelectedIndex = 0;
+                    textBoxValue.Text = value.Value.ToString();
                 }
                 if (value is Capacitor)
                 {
-                    comboBoxElements.SelectedIndex = 2;
+                    comboBoxAddElement.SelectedIndex = 1;
+                    textBoxValue.Text = value.Value.ToString();
                 }
                 if (value is Inductor)
                 {
-                    comboBoxElements.SelectedIndex = 3;
+                    comboBoxAddElement.SelectedIndex = 2;
+                    textBoxValue.Text = value.Value.ToString();
                 }
-
-                _element = value;
-                
             }
         }
-        
+
         private void buttonOk_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
