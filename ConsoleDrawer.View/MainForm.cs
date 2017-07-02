@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConsoleDrawer.View.Draw;
+using Elements.Curcuit;
 using Elemnts.Curcuit;
 using Elemnts.Elements;
 
@@ -101,7 +102,7 @@ namespace ConsoleDrawer.View
             serialCircuitBindingSource.DataSource = Circuit;
         }
 
-       
+
 
         private void buttonDraw_Click(object sender, EventArgs e)
         {
@@ -115,7 +116,7 @@ namespace ConsoleDrawer.View
         private void buttonCalculate_Click(object sender, EventArgs e)
         {
             var impedance = Circuit.CalculateZ(Convert.ToDouble(textBoxFrequency.Text));
-            textBoxReal.Text = impedance.Real.ToString();   
+            textBoxReal.Text = impedance.Real.ToString();
             textBoxIm.Text = impedance.Imaginary.ToString();
         }
 
@@ -130,13 +131,13 @@ namespace ConsoleDrawer.View
             }
             if (serialCircuitBindingSource.Current is ICircuit)
             {
-                ICircuit circuit = (ICircuit) serialCircuitBindingSource.Current;
+                ICircuit circuit = (ICircuit)serialCircuitBindingSource.Current;
                 Circuit.RemoveCircuit(circuit, Circuit);
                 serialCircuitBindingSource.DataSource = Circuit;
             }
         }
 
-        
+
         private void dataGridViewCircuit_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (serialCircuitBindingSource.Current is IElement)
@@ -144,7 +145,7 @@ namespace ConsoleDrawer.View
                 MessageBox.Show(@"Select circuit");
                 return;
             }
-            var circuit = (ICircuit) serialCircuitBindingSource.Current;
+            var circuit = (ICircuit)serialCircuitBindingSource.Current;
             serialCircuitBindingSource.DataSource = circuit.Components;
         }
 
