@@ -98,7 +98,7 @@ namespace ConsoleDrawer.View
                 serial1.Add(parallel1);
                 Circuit = serial1;
             }
-            serialCircuitBindingSource.DataSource = Circuit.Components;
+            serialCircuitBindingSource.DataSource = Circuit;
         }
 
        
@@ -115,27 +115,42 @@ namespace ConsoleDrawer.View
         private void buttonCalculate_Click(object sender, EventArgs e)
         {
             var impedance = Circuit.CalculateZ(Convert.ToDouble(textBoxFrequency.Text));
-            textBoxReal.Text = impedance.Real.ToString();
+            textBoxReal.Text = impedance.Real.ToString();   
             textBoxIm.Text = impedance.Imaginary.ToString();
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            IElement element = (IElement)serialCircuitBindingSource.Current;
-            Circuit.RemoveComponent(element);
-            serialCircuitBindingSource.DataSource = Circuit.Components;
+            Circuit.CircuitChanged += CircuitChanged;
+            if (serialCircuitBindingSource.Current is IElement)
+            {
+                IElement element = (IElement)serialCircuitBindingSource.Current;
+                Circuit.RemoveComponent(element, Circuit);
+                serialCircuitBindingSource.DataSource = Circuit;
+            }
+            if (serialCircuitBindingSource.Current is ICircuit)
+            {
+                ICircuit circuit = (ICircuit) serialCircuitBindingSource.Current;
+                Circuit.RemoveCircuit(circuit, Circuit);
+                serialCircuitBindingSource.DataSource = Circuit;
+            }
         }
 
-
-
+        
         private void dataGridViewCircuit_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (serialCircuitBindingSource.Current is IElement)
+            {
+                MessageBox.Show(@"Select circuit");
+                return;
+            }
             var circuit = (ICircuit) serialCircuitBindingSource.Current;
             serialCircuitBindingSource.DataSource = circuit.Components;
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
         {
+            Circuit.CircuitChanged += CircuitChanged;
             var component = serialCircuitBindingSource.Current;
             if (component is IElement)
             {
@@ -146,7 +161,7 @@ namespace ConsoleDrawer.View
                 };
                 form.ShowDialog();
                 var newElement = form.Element;
-                Circuit.ModifyComponent(element, newElement);
+                Circuit.ModifyComponent(element, newElement, Circuit);
                 serialCircuitBindingSource.DataSource = Circuit.Components;
             }
             if (component is ICircuit)
@@ -158,9 +173,23 @@ namespace ConsoleDrawer.View
                 };
                 form.ShowDialog();
                 var newCircuit = form.Circuit;
-                Circuit.ModifyCircuit(circuit, newCircuit);
-                serialCircuitBindingSource.DataSource = Circuit.Components;
+                Circuit.ModifyCircuit(circuit, newCircuit, Circuit);
+                serialCircuitBindingSource.DataSource = Circuit;
             }
+        }
+
+        private void ValueChanged(object sender, EventArgs e)
+        {
+            var impedance = Circuit.CalculateZ(Convert.ToDouble(textBoxFrequency.Text));
+            textBoxReal.Text = impedance.Real.ToString();
+            textBoxIm.Text = impedance.Imaginary.ToString();
+        }
+
+        private void CircuitChanged(object sender, EventArgs e)
+        {
+            var impedance = Circuit.CalculateZ(Convert.ToDouble(textBoxFrequency.Text));
+            textBoxReal.Text = impedance.Real.ToString();
+            textBoxIm.Text = impedance.Imaginary.ToString();
         }
     }
 }

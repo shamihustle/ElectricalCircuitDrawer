@@ -18,7 +18,11 @@ namespace Elemnts.Curcuit
         public List<IComponent> Components
         {
             get { return _components; }
-            set { _components = value; }
+            set
+            {
+                _components = value;
+                CircuitChanged?.Invoke(this, new EventArgs());
+            }
         }
 
         /// <summary>
@@ -38,6 +42,8 @@ namespace Elemnts.Curcuit
         public void Add(IComponent component)
         {
             _components.Add(component);
+            CircuitChanged?.Invoke(this, new EventArgs());
+
         }
 
         /// <summary>
@@ -47,6 +53,8 @@ namespace Elemnts.Curcuit
         public void Remove(IComponent component)
         {
             _components.Remove(component);
+            CircuitChanged?.Invoke(this, new EventArgs());
+
         }
 
         /// <summary>
@@ -66,7 +74,7 @@ namespace Elemnts.Curcuit
             return 1 / сonduction;
         }
 
-        public void ModifyComponent(IElement componentOld, IElement componentNew)
+        public void ModifyComponent(IElement componentOld, IElement componentNew, ICircuit mainCircuit)
         {
             foreach (var component in _components)
             {
@@ -78,18 +86,20 @@ namespace Elemnts.Curcuit
                         int index = _components.IndexOf(component);
                         _components.RemoveAt(index);
                         _components.Insert(index, componentNew);
+                        mainCircuit.CircuitChanged += OnCircuitChanged;
                         break;
                     }
                 }
                 if (component is ICircuit)
                 {
                     var circuit = (ICircuit)component;
-                    circuit.ModifyComponent(componentOld, componentNew);
+                    circuit.ModifyComponent(componentOld, componentNew, mainCircuit);
                 }
             }
+            CircuitChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public void RemoveComponent(IElement element)
+        public void RemoveComponent(IElement element, ICircuit mainCircuit)
         {
             foreach (var component in _components)
             {
@@ -99,18 +109,20 @@ namespace Elemnts.Curcuit
                     if (el == element)
                     {
                         _components.Remove(el);
+                        mainCircuit.CircuitChanged += OnCircuitChanged;
                         break;
                     }
                 }
                 if (component is ICircuit)
                 {
                     var circuit = (ICircuit)component;
-                    circuit.RemoveComponent(element);
+                    circuit.RemoveComponent(element, mainCircuit);
                 }
             }
+            CircuitChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public void ModifyCircuit(ICircuit componentOld, ICircuit componentNew)
+        public void ModifyCircuit(ICircuit componentOld, ICircuit componentNew, ICircuit mainCircuit)
         {
             foreach (var component in _components)
             {
@@ -122,14 +134,37 @@ namespace Elemnts.Curcuit
                         int index = _components.IndexOf(component);
                         _components.RemoveAt(index);
                         _components.Insert(index, componentNew);
+                        mainCircuit.CircuitChanged += OnCircuitChanged;
                         break;
                     }
-                    else
-                    {
-                        el.ModifyCircuit(componentOld, componentNew);
-                    }
+                    el.ModifyCircuit(componentOld, componentNew, mainCircuit);
                 }
             }
+            CircuitChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void RemoveCircuit(ICircuit components, ICircuit mainCircuit)
+        {
+            foreach (var component in _components)
+            {
+                if (component is ICircuit)
+                {
+                    var el = (ICircuit)component;
+                    if (el == components)
+                    {
+                        _components.Remove(el);
+                        mainCircuit.CircuitChanged += OnCircuitChanged;
+                        break;
+                    }
+                    el.RemoveCircuit(components, mainCircuit);
+                }
+            }
+            CircuitChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnCircuitChanged(object sender, EventArgs args)
+        {
+            CircuitChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace ConsoleDrawer.View
             InitializeComponent();
         }
 
+        public event EventHandler ValueChanged;
 
         public IElement Element
         {
@@ -28,17 +30,20 @@ namespace ConsoleDrawer.View
                 {
                     case 0:
                         {
-                            var resistor = new Resistor(Convert.ToDouble(textBoxValue.Text));
+                            var resistor = new Resistor();
+                            resistor.Value = Convert.ToDouble(textBoxValue.Text);
                             return resistor;
                         }
                     case 1:
                         {
-                            var capacitor = new Capacitor(Convert.ToDouble(textBoxValue.Text));
+                            var capacitor = new Capacitor();
+                            capacitor.Value = Convert.ToDouble(textBoxValue.Text);
                             return capacitor;
                         }
                     case 2:
                         {
-                            var inductor = new Inductor(Convert.ToDouble(textBoxValue.Text));
+                            var inductor = new Inductor();
+                            inductor.Value = Convert.ToDouble(textBoxValue.Text);
                             return inductor;
                         }
                 }
@@ -69,5 +74,7 @@ namespace ConsoleDrawer.View
             DialogResult = DialogResult.OK;
             Close();
         }
+
+        
     }
 }
