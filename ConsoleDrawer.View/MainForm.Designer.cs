@@ -39,10 +39,10 @@
             this.textBoxFrequency = new System.Windows.Forms.TextBox();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.dataGridViewCircuit = new System.Windows.Forms.DataGridView();
+            this.buttonModify = new System.Windows.Forms.Button();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serialCircuitBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.resistorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.buttonModify = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCircuit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.serialCircuitBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resistorBindingSource)).BeginInit();
@@ -122,6 +122,7 @@
             this.textBoxFrequency.Name = "textBoxFrequency";
             this.textBoxFrequency.Size = new System.Drawing.Size(39, 22);
             this.textBoxFrequency.TabIndex = 9;
+            this.textBoxFrequency.Text = "1";
             // 
             // buttonRemove
             // 
@@ -149,6 +150,16 @@
             this.dataGridViewCircuit.TabIndex = 12;
             this.dataGridViewCircuit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCircuit_CellDoubleClick);
             // 
+            // buttonModify
+            // 
+            this.buttonModify.Location = new System.Drawing.Point(4, 369);
+            this.buttonModify.Name = "buttonModify";
+            this.buttonModify.Size = new System.Drawing.Size(75, 23);
+            this.buttonModify.TabIndex = 13;
+            this.buttonModify.Text = "Modify";
+            this.buttonModify.UseVisualStyleBackColor = true;
+            this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
+            // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
@@ -163,16 +174,6 @@
             // resistorBindingSource
             // 
             this.resistorBindingSource.DataSource = typeof(Elemnts.Elements.Resistor);
-            // 
-            // buttonModify
-            // 
-            this.buttonModify.Location = new System.Drawing.Point(4, 369);
-            this.buttonModify.Name = "buttonModify";
-            this.buttonModify.Size = new System.Drawing.Size(75, 23);
-            this.buttonModify.TabIndex = 13;
-            this.buttonModify.Text = "Modify";
-            this.buttonModify.UseVisualStyleBackColor = true;
-            this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
             // 
             // MainForm
             // 

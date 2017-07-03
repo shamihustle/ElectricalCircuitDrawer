@@ -117,6 +117,11 @@ namespace ConsoleDrawer.View
         /// <param name="e"></param>
         private void buttonDraw_Click(object sender, EventArgs e)
         {
+            if (serialCircuitBindingSource.Count == 0)
+            {
+                MessageBox.Show(@"List is empty");
+                return;
+            }
             var form = new FormDraw
             {
                 Component = Circuit
@@ -143,16 +148,22 @@ namespace ConsoleDrawer.View
         /// <param name="e"></param>
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            Circuit.CircuitChanged += CircuitChanged;
-            if (serialCircuitBindingSource.Current is IElement)
+            if (serialCircuitBindingSource.Count == 0 || serialCircuitBindingSource.Current == null)
             {
-                IElement element = (IElement)serialCircuitBindingSource.Current;
+                MessageBox.Show(@"List is empty");
+                return;
+            }
+            Circuit.CircuitChanged += CircuitChanged;
+            var component = serialCircuitBindingSource.Current;
+            if (component is IElement)
+            {
+                IElement element = (IElement)component;
                 Circuit.RemoveElement(element, Circuit);
                 serialCircuitBindingSource.DataSource = Circuit;
             }
-            if (serialCircuitBindingSource.Current is ICircuit)
+            if (component is ICircuit)
             {
-                ICircuit circuit = (ICircuit)serialCircuitBindingSource.Current;
+                ICircuit circuit = (ICircuit)component;
                 Circuit.RemoveCircuit(circuit, Circuit);
                 serialCircuitBindingSource.DataSource = Circuit;
             }
@@ -181,6 +192,11 @@ namespace ConsoleDrawer.View
         /// <param name="e"></param>
         private void buttonModify_Click(object sender, EventArgs e)
         {
+            if (serialCircuitBindingSource.Count == 0 || serialCircuitBindingSource.Current == null)
+            {
+                MessageBox.Show(@"List is empty");
+                return;
+            }
             Circuit.CircuitChanged += CircuitChanged;
             var component = serialCircuitBindingSource.Current;
             if (component is IElement)
@@ -191,9 +207,19 @@ namespace ConsoleDrawer.View
                     Element = element
                 };
                 form.ShowDialog();
-                var newElement = form.Element;
-                Circuit.ModifyElement(element, newElement, Circuit);
-                serialCircuitBindingSource.DataSource = Circuit.Components;
+                try
+                {
+                    var newElement = form.Element;
+                    Circuit.ModifyElement(element, newElement, Circuit);
+                    serialCircuitBindingSource.DataSource = Circuit.Components;
+
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                
             }
             if (component is ICircuit)
             {

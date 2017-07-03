@@ -90,7 +90,10 @@ namespace Elements.Curcuit
                         int index = _components.IndexOf(component);
                         _components.RemoveAt(index);
                         _components.Insert(index, componentNew);
-                        mainCircuit.CircuitChanged += OnCircuitChanged;
+                        if (mainCircuit.Components != _components)
+                        {
+                            mainCircuit.CircuitChanged += OnCircuitChanged;
+                        }
                         break;
                     }
                 }
@@ -118,7 +121,10 @@ namespace Elements.Curcuit
                     if (el == element)
                     {
                         _components.Remove(el);
-                        mainCircuit.CircuitChanged += OnCircuitChanged;
+                        if (mainCircuit.Components != _components)
+                        {
+                            mainCircuit.CircuitChanged += OnCircuitChanged;
+                        }
                         break;
                     }
                 }
