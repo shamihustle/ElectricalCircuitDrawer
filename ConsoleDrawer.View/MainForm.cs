@@ -21,8 +21,16 @@ namespace ConsoleDrawer.View
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Основная цепь
+        /// </summary>
         private ICircuit Circuit;
 
+        /// <summary>
+        /// Выбор схемы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             dataGridViewCircuit.Rows.Clear();
@@ -102,8 +110,11 @@ namespace ConsoleDrawer.View
             serialCircuitBindingSource.DataSource = Circuit;
         }
 
-
-
+        /// <summary>
+        /// Отрисовать схему
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDraw_Click(object sender, EventArgs e)
         {
             var form = new FormDraw
@@ -113,6 +124,11 @@ namespace ConsoleDrawer.View
             form.ShowDialog();
         }
 
+        /// <summary>
+        /// Рассчет комплексного сопротивления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCalculate_Click(object sender, EventArgs e)
         {
             var impedance = Circuit.CalculateZ(Convert.ToDouble(textBoxFrequency.Text));
@@ -120,13 +136,18 @@ namespace ConsoleDrawer.View
             textBoxIm.Text = impedance.Imaginary.ToString();
         }
 
+        /// <summary>
+        /// Удалить компонент
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonRemove_Click(object sender, EventArgs e)
         {
             Circuit.CircuitChanged += CircuitChanged;
             if (serialCircuitBindingSource.Current is IElement)
             {
                 IElement element = (IElement)serialCircuitBindingSource.Current;
-                Circuit.RemoveComponent(element, Circuit);
+                Circuit.RemoveElement(element, Circuit);
                 serialCircuitBindingSource.DataSource = Circuit;
             }
             if (serialCircuitBindingSource.Current is ICircuit)
@@ -137,7 +158,11 @@ namespace ConsoleDrawer.View
             }
         }
 
-
+        /// <summary>
+        /// Переход на другой уровень подцепи
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridViewCircuit_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (serialCircuitBindingSource.Current is IElement)
@@ -149,6 +174,11 @@ namespace ConsoleDrawer.View
             serialCircuitBindingSource.DataSource = circuit.Components;
         }
 
+        /// <summary>
+        /// Изменить компонент
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonModify_Click(object sender, EventArgs e)
         {
             Circuit.CircuitChanged += CircuitChanged;
@@ -162,7 +192,7 @@ namespace ConsoleDrawer.View
                 };
                 form.ShowDialog();
                 var newElement = form.Element;
-                Circuit.ModifyComponent(element, newElement, Circuit);
+                Circuit.ModifyElement(element, newElement, Circuit);
                 serialCircuitBindingSource.DataSource = Circuit.Components;
             }
             if (component is ICircuit)
@@ -179,13 +209,11 @@ namespace ConsoleDrawer.View
             }
         }
 
-        private void ValueChanged(object sender, EventArgs e)
-        {
-            var impedance = Circuit.CalculateZ(Convert.ToDouble(textBoxFrequency.Text));
-            textBoxReal.Text = impedance.Real.ToString();
-            textBoxIm.Text = impedance.Imaginary.ToString();
-        }
-
+        /// <summary>
+        /// Перерасчет комплексного сопротивления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CircuitChanged(object sender, EventArgs e)
         {
             var impedance = Circuit.CalculateZ(Convert.ToDouble(textBoxFrequency.Text));

@@ -129,12 +129,8 @@ namespace ConsoleCircuit
 
             {
                 var serial = new SerialCircuit();
-                serial.Add(new Resistor(10));
-                var parallel = new ParallelCircuit();
-                parallel.Add(new Resistor(20));
-                parallel.Add(new Capacitor(35));
-                serial.Add(parallel);
-                Console.WriteLine(@"Z = " + serial.CalculateZ(50));
+                serial.Add(new Capacitor(12));
+                Console.WriteLine(@"Z = " + serial.CalculateZ(12));
 
             }
             Console.ReadKey();

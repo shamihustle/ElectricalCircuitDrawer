@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using Elements.Elements;
 
 namespace Elemnts.Elements
 {
@@ -8,7 +9,6 @@ namespace Elemnts.Elements
     /// </summary>
     public class Inductor : IElement
     {
-
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -27,7 +27,7 @@ namespace Elemnts.Elements
         private double _value;
 
         /// <summary>
-        /// Уникальное имя элемента
+        /// Имя элемента
         /// </summary>
         public string Name
         {
@@ -41,14 +41,7 @@ namespace Elemnts.Elements
         {
             get { return _value; }
 
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException(@"The inductance must be greater than zero");
-                }
-                _value = value;
-            }
+            set { _value = ValueChecker.CheckValue(value); }
         }
 
         /// <summary>

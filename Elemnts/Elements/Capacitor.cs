@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using Elements.Elements;
 
 namespace Elemnts.Elements
 {
@@ -26,9 +27,8 @@ namespace Elemnts.Elements
         private double _value;
 
         /// <summary>
-        /// Уникальное имя элемента
+        /// Имя элемента
         /// </summary>
-        //TODO проверка на string.Empty
         public string Name
         {
             get { return "Capacitor"; }
@@ -37,19 +37,11 @@ namespace Elemnts.Elements
         /// <summary>
         /// Электроёмкость конденсатора
         /// </summary>
-        //TODO Проверка double значения на == double.NaN, double.Infinity и <= 0
         public double Value
         {
             get { return _value; }
 
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException(@"The electrical capacity must be greater than zero");
-                }
-                _value = value;
-            }
+            set { _value = ValueChecker.CheckValue(value); }
         }
 
         /// <summary>

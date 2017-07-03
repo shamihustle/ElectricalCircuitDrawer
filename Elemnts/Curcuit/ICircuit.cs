@@ -28,11 +28,11 @@ namespace Elemnts.Curcuit
         /// <param name="component">Элемент или соединение</param>
         void Remove(IComponent component);
 
-        void ModifyComponent(IElement componentOld, IElement componentNew, ICircuit mainCircuit);
+        void ModifyElement(IElement componentOld, IElement componentNew, ICircuit mainCircuit);
 
         void ModifyCircuit(ICircuit componentOld, ICircuit componentNew, ICircuit mainCircuit);
 
-        void RemoveComponent(IElement element, ICircuit mainCircuit);
+        void RemoveElement(IElement element, ICircuit mainCircuit);
 
         void RemoveCircuit(ICircuit components, ICircuit mainCircuit);
 

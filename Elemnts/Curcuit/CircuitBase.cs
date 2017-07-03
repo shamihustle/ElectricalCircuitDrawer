@@ -10,8 +10,14 @@ using Elemnts.Elements;
 
 namespace Elements.Curcuit
 {
+    /// <summary>
+    /// Базовый класс цепи
+    /// </summary>
     public abstract class CircuitBase : ICircuit
     {
+        /// <summary>
+        /// Событие изменине цепи
+        /// </summary>
         public event EventHandler CircuitChanged;
 
         /// <summary>
@@ -20,19 +26,13 @@ namespace Elements.Curcuit
         public List<IComponent> Components
         {
             get { return _components; }
-            set
-            {
-                _components = value;
-                CircuitChanged?.Invoke(this, new EventArgs());
-
-            }
+            set { _components = value; }
         }
 
         /// <summary>
-        /// Уникальное имя соединения
+        /// Имя соединения
         /// </summary>
-        //TODO проверка на string.Empty
-        public virtual string Name { get; } = "Serial circuit";
+        public virtual string Name { get; } = "";
 
         /// <summary>
         /// Список компонентов в соединении
@@ -45,9 +45,11 @@ namespace Elements.Curcuit
         /// <param name="component">Компонент</param>
         public void Add(IComponent component)
         {
-            //TODO Проверка _component на == null
+            if (_components == null)
+            {
+                throw new ArgumentException(@"List is empty");
+            }
             _components.Add(component);
-            CircuitChanged?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
@@ -56,31 +58,27 @@ namespace Elements.Curcuit
         /// <param name="component">Компонент</param>
         public void Remove(IComponent component)
         {
-            //TODO Проверка _component на == null
+            if (_components == null)
+            {
+                throw new ArgumentException(@"List is empty");
+            }
             _components.Remove(component);
-            CircuitChanged?.Invoke(this, new EventArgs());
         }
 
         /// <summary>
         /// Рассчет комплексного сопротивления
         /// </summary>
-        /// <param name="angularFrequency">Частота сигнала</param>
+        /// <param name="frequency">Частота сигнала</param>
         /// <returns>Уомплексное сопротивление цепи последоватенльно соединения</returns>
-        public virtual Complex CalculateZ(double angularFrequency)
-        {
-            //TODO Проверка double переменной на == double.NaN, double.Infinity и <= 0
-            Complex сonduction = new Complex();
+        public virtual Complex CalculateZ(double frequency) => new Complex(0, 0);
 
-            for (int i = 0; i < _components.Count; i++)
-            {
-                сonduction += _components[i].CalculateZ(angularFrequency);
-            }
-
-            return сonduction;
-        }
-
-        //TODO xml комментарий
-        public void ModifyComponent(IElement componentOld, IElement componentNew, ICircuit mainCircuit)
+        /// <summary>
+        /// Изменить элемент
+        /// </summary>
+        /// <param name="componentOld">Элемент который надо изменить</param>
+        /// <param name="componentNew">Элемент на который надо заменить</param>
+        /// <param name="mainCircuit">Основная цепь</param>
+        public void ModifyElement(IElement componentOld, IElement componentNew, ICircuit mainCircuit)
         {
             foreach (var component in _components)
             {
@@ -99,13 +97,18 @@ namespace Elements.Curcuit
                 if (component is ICircuit)
                 {
                     var circuit = (ICircuit)component;
-                    circuit.ModifyComponent(componentOld, componentNew, mainCircuit);
+                    circuit.ModifyElement(componentOld, componentNew, mainCircuit);
                 }
             }
             CircuitChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        public void RemoveComponent(IElement element, ICircuit mainCircuit)
+        /// <summary>
+        /// Удалить элемент
+        /// </summary>
+        /// <param name="element">Элемент, который нужно удалить</param>
+        /// <param name="mainCircuit">Основная цепь</param>
+        public void RemoveElement(IElement element, ICircuit mainCircuit)
         {
             foreach (var component in _components)
             {
@@ -122,13 +125,19 @@ namespace Elements.Curcuit
                 if (component is ICircuit)
                 {
                     var circuit = (ICircuit)component;
-                    circuit.RemoveComponent(element, mainCircuit);
+                    circuit.RemoveElement(element, mainCircuit);
                 }
             }
             CircuitChanged?.Invoke(this, EventArgs.Empty);
 
         }
 
+        /// <summary>
+        /// Изменит элемент
+        /// </summary>
+        /// <param name="componentOld">Элемент который надо изменить</param>
+        /// <param name="componentNew">Элемент на который надо заменить</param>
+        /// <param name="mainCircuit">Основная цепь</param>
         public void ModifyCircuit(ICircuit componentOld, ICircuit componentNew, ICircuit mainCircuit)
         {
             foreach (var component in _components)
@@ -153,6 +162,11 @@ namespace Elements.Curcuit
             CircuitChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Удалить цепь
+        /// </summary>
+        /// <param name="components">Цепь, которую надо удалить</param>
+        /// <param name="mainCircuit">Основная цепь</param>
         public void RemoveCircuit(ICircuit components, ICircuit mainCircuit)
         {
             foreach (var component in _components)
@@ -175,6 +189,11 @@ namespace Elements.Curcuit
             CircuitChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Зажигание события
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public void OnCircuitChanged(object sender, EventArgs args)
         {
             CircuitChanged?.Invoke(this, EventArgs.Empty);
