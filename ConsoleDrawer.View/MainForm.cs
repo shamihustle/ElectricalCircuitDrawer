@@ -158,13 +158,13 @@ namespace ConsoleDrawer.View
             if (component is IElement)
             {
                 IElement element = (IElement)component;
-                Circuit.RemoveElement(element, Circuit);
+                Circuit.RemoveElement(element);
                 serialCircuitBindingSource.DataSource = Circuit;
             }
             if (component is ICircuit)
             {
                 ICircuit circuit = (ICircuit)component;
-                Circuit.RemoveCircuit(circuit, Circuit);
+                Circuit.RemoveCircuit(circuit);
                 serialCircuitBindingSource.DataSource = Circuit;
             }
         }
@@ -210,7 +210,7 @@ namespace ConsoleDrawer.View
                 try
                 {
                     var newElement = form.Element;
-                    Circuit.ModifyElement(element, newElement, Circuit);
+                    Circuit.ModifyElement(element, newElement);
                     serialCircuitBindingSource.DataSource = Circuit.Components;
 
                 }
@@ -230,7 +230,7 @@ namespace ConsoleDrawer.View
                 };
                 form.ShowDialog();
                 var newCircuit = form.Circuit;
-                Circuit.ModifyCircuit(circuit, newCircuit, Circuit);
+                Circuit.ModifyCircuit(circuit, newCircuit);
                 serialCircuitBindingSource.DataSource = Circuit;
             }
         }

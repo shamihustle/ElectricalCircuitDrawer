@@ -28,7 +28,6 @@ namespace UnitTests.CircuitTests
 
         static readonly TestCaseData[] ComplexValueTest =
         {
-
         new TestCaseData(12, (-1/(288*Math.PI)), 12, new Resistor(12), new Capacitor(12)),
         new TestCaseData(1, -1/(2*Math.PI), 1, new Resistor(1), new Capacitor(1))
         };

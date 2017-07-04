@@ -235,15 +235,21 @@ namespace ConsoleDrawer.View.Draw
         private static Bitmap DrawComponent(ParallelCircuit parallel)
         {
             var size = SizeDeterminator.GetSize(parallel);
+            List<Bitmap> bitMapList = new List<Bitmap>();
             var bitMapMainCircuit = new Bitmap(size.Width,size.Height);
+            bitMapList.Add(bitMapMainCircuit);
             int x = _inputLineElement;
             int y = 0;
-            var nesting = false; // make comment
             using (Graphics g = Graphics.FromImage(bitMapMainCircuit))
             {
                 g.DrawLine(Pens.Black, 0, size.Height / 2, _inputLineElement, size.Height / 2);
+                
+                if (parallel.Components[1] is ICircuit)
+                {
+                    g.DrawLine(Pens.Black, x, y + SizeDeterminator.GetSize(parallel.Components[0]).Height / 2, x, size.Height - SizeDeterminator.GetSize(parallel.Components[1]).Height / 2);
+                }
                 g.DrawLine(Pens.Black, x, y + SizeDeterminator.GetSize(parallel.Components[0]).Height / 2, x, size.Height - SizeDeterminator.GetSize(parallel.Components[0]).Height / 2);
-
+                
                 foreach (var component in parallel.Components)
                 {
                     if (component is IElement)
@@ -263,19 +269,27 @@ namespace ConsoleDrawer.View.Draw
                         {
                             var serialSubcircuit = (SerialCircuit) circuit;
                             bitmapCircuit = DrawComponent(serialSubcircuit);
+                            bitMapList.Add(bitmapCircuit);
                         }
                         if (circuit is ParallelCircuit)
                         {
                             var parallelSubcircuit = (ParallelCircuit) circuit;
                             bitmapCircuit = DrawComponent(parallelSubcircuit);
+                            bitMapList.Add(bitmapCircuit);
                         }
                         g.DrawImage(bitmapCircuit, new Point(x, y));
                         g.DrawLine(Pens.Black, x + bitmapCircuit.Width, y + bitmapCircuit.Height / 2, bitMapMainCircuit.Width - _outputLineCircuit, y + bitmapCircuit.Height / 2);
                         y += bitmapCircuit.Height;
                     }
-                }                
-                g.DrawLine(Pens.Black, bitMapMainCircuit.Width - _outputLineCircuit, SizeDeterminator.GetSize(parallel.Components[0]).Height / 2, bitMapMainCircuit.Width - _outputLineCircuit, size.Height - SizeDeterminator.GetSize(parallel.Components[0]).Height / 2);
-
+                }
+                if (parallel.Components[0] is ICircuit)
+                {
+                    g.DrawLine(Pens.Black, bitMapMainCircuit.Width - _outputLineCircuit, SizeDeterminator.GetSize(parallel.Components[0]).Height / 2, bitMapMainCircuit.Width - _outputLineCircuit, size.Height - SizeDeterminator.GetSize(parallel.Components[1]).Height / 2);
+                }
+                else
+                {
+                    g.DrawLine(Pens.Black, bitMapMainCircuit.Width - _outputLineCircuit, SizeDeterminator.GetSize(parallel.Components[0]).Height / 2, bitMapMainCircuit.Width - _outputLineCircuit, size.Height - SizeDeterminator.GetSize(parallel.Components[0]).Height / 2);
+                }
                 g.DrawLine(Pens.Black, bitMapMainCircuit.Width - _outputLineCircuit, bitMapMainCircuit.Height / 2, bitMapMainCircuit.Width, bitMapMainCircuit.Height / 2);
             }
             return bitMapMainCircuit;
