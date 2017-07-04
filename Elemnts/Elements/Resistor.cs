@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using Elements.Elements;
 
 namespace Elemnts.Elements
 {
@@ -8,6 +9,7 @@ namespace Elemnts.Elements
     /// </summary>
     public class Resistor : IElement
     {
+
         /// <summary>
         /// Конструктор резистора
         /// </summary>
@@ -16,19 +18,21 @@ namespace Elemnts.Elements
         {
             _value = value;
         }
-        
+
+        public Resistor()
+        {
+        }
+
         private string _name;
 
         private double _value;
 
         /// <summary>
-        /// Уникальное имя элемента
+        /// Имя элемента
         /// </summary>
         public string Name
         {
-            get { return _name; }
-
-            set { _name = value; }
+            get { return "Resistor"; }
         }
 
         /// <summary>
@@ -38,14 +42,7 @@ namespace Elemnts.Elements
         {
             get { return _value; }
 
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentException(@"The resistance must be greater than zero");
-                }
-                _value = value;
-            }
+            set { _value = ValueChecker.CheckValue(value); }
         }
 
         /// <summary>
@@ -57,5 +54,6 @@ namespace Elemnts.Elements
         {
             return new Complex(_value ,0);
         }
+        
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Elemnts.Elements
+﻿using System;
+
+namespace Elemnts.Elements
 {
     public interface IElement : IComponent
     {
@@ -6,6 +8,5 @@
         /// Значение номинала
         /// </summary>
         double Value { get; set; }
-        
     }
 }

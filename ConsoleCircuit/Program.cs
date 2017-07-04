@@ -127,6 +127,12 @@ namespace ConsoleCircuit
 #endregion
             }
 
+            {
+                var serial = new SerialCircuit();
+                serial.Add(new Capacitor(12));
+                Console.WriteLine(@"Z = " + serial.CalculateZ(12));
+
+            }
             Console.ReadKey();
         }
     }
